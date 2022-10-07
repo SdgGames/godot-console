@@ -16,7 +16,7 @@ const FilterType = preload('Type/FilterType.gd')
 # @param  bool  is_console_shown
 signal toggled(is_console_shown)
 # @param  String       name
-# @param  Reference    target
+# @param  RefCounted    target
 # @param  String|null  target_name
 signal command_added(name, target, target_name)
 # @param  String  name
@@ -27,10 +27,10 @@ signal command_executed(command)
 signal command_not_found(name)
 
 # @var  History
-var History = preload('Misc/History.gd').new(100) setget _set_protected
+var History = preload('Misc/History.gd').new(100)
 
 # @var  Logger
-var Log = preload('Misc/Logger.gd').new() setget _set_protected
+var Log = preload('Misc/Logger.gd').new()
 
 # @var  Command/CommandService
 var _command_service
@@ -43,20 +43,20 @@ var _action_service
 var _erase_bb_tags_regex
 
 # @var  bool
-var is_console_shown = true setget _set_protected
+var is_console_shown := true
 
 # @var  bool
-var consume_input = true
+var consume_input := true
 
 # @var  Control
 var previous_focus_owner = null
 
 
 ### Console nodes
-onready var _consoleBox = $ConsoleBox
-onready var Text = $ConsoleBox/Container/ConsoleText setget _set_protected
-onready var Line = $ConsoleBox/Container/ConsoleLine setget _set_protected
-onready var _animationPlayer = $ConsoleBox/AnimationPlayer
+@onready var _consoleBox = $ConsoleBox
+@onready var Text = $ConsoleBox/Container/ConsoleText
+@onready var Line = $ConsoleBox/Container/ConsoleLine
+@onready var _animationPlayer = $ConsoleBox/AnimationPlayer
 
 
 func _init():
@@ -72,16 +72,13 @@ func _ready():
 	self.Text.set_selection_enabled(true)
 	# Follow console output (for scrolling)
 	self.Text.set_scroll_follow(true)
-	# React to clicks on console urls
-	self.Text.connect('meta_clicked', self.Line, 'set_text')
+	# React to clicks checked console urls
+	self.Text.connect('meta_clicked',Callable(self.Line,'set_text'))
 
 	# Hide console by default
 	self._consoleBox.hide()
-	self._animationPlayer.connect("animation_finished", self, "_toggle_animation_finished")
+	self._animationPlayer.connect("animation_finished",Callable(self,"_toggle_animation_finished"))
 	self.toggle_console()
-
-	# Console keyboard control
-	set_process_input(true)
 
 	# Show some info
 	var v = Engine.get_version_info()
@@ -114,12 +111,12 @@ func get_action_service():
 # @param    String  name
 # @returns  Command/Command|null
 func getCommand(name):
-	Console.Log.warn("DEPRECATED: We're moving our api from camelCase to snake_case, please update this method to `get_command`. Please refer to documentation for more info.")
-	return self.get_command(name)
+	Console.Log.warn("DEPRECATED: We're moving our api from camelCase to snake_case, please update this method to `is_command_or_control_pressed`. Please refer to documentation for more info.")
+	return self.is_command_or_control_pressed(name)
 
 # @param    String  name
 # @returns  Command/Command|null
-func get_command(name):
+func is_command_or_control_pressed(name):
 	return self._command_service.get(name)
 
 # @deprecated
@@ -136,7 +133,7 @@ func find_commands(name):
 
 # @deprecated
 # @param    String       name
-# @param    Reference    target
+# @param    RefCounted    target
 # @param    String|null  target_name
 # @returns  Command/CommandBuilder
 func addCommand(name, target, target_name = null):
@@ -146,12 +143,12 @@ func addCommand(name, target, target_name = null):
 # Example usage:
 # ```gdscript
 # Console.add_command('sayHello', self, 'print_hello')\
-# 	.set_description('Prints "Hello %name%!"')\
-# 	.add_argument('name', TYPE_STRING)\
-# 	.register()
+# 	super.set_description('Prints "Hello %name%!"')\
+# 	super.add_argument('name', TYPE_STRING)\
+# 	super.register()
 # ```
 # @param    String       name
-# @param    Reference    target
+# @param    RefCounted    target
 # @param    String|null  target_name
 # @returns  Command/CommandBuilder
 func add_command(name, target, target_name = null):
@@ -169,7 +166,7 @@ func removeCommand(name):
 # @returns  int
 func remove_command(name):
 	emit_signal("command_removed", name)
-	return self._command_service.remove(name)
+	return self._command_service.remove_at(name)
 
 
 # @param    String  message
@@ -177,7 +174,7 @@ func remove_command(name):
 func write(message):
 	message = str(message)
 	if self.Text:
-		self.Text.set_bbcode(self.Text.get_bbcode() + message)
+		self.Text.set_text(self.Text.get_text() + message)
 	print(self._erase_bb_tags_regex.sub(message, '', true))
 
 
@@ -194,14 +191,14 @@ func writeLine(message = ''):
 func write_line(message = ''):
 	message = str(message)
 	if self.Text:
-		self.Text.set_bbcode(self.Text.get_bbcode() + message + '\n')
+		self.Text.set_text(self.Text.get_text() + message + '\n')
 	print(self._erase_bb_tags_regex.sub(message, '', true))
 
 
 # @returns  void
 func clear():
 	if self.Text:
-		self.Text.set_bbcode('')
+		self.Text.set_text('')
 
 
 # @returns  Console
@@ -213,7 +210,7 @@ func toggleConsole():
 func toggle_console():
 	# Open the console
 	if !self.is_console_shown:
-		previous_focus_owner = self.Line.get_focus_owner()
+		previous_focus_owner = self.Line.get_viewport().gui_get_focus_owner()
 		self._consoleBox.show()
 		self.Line.clear()
 		self.Line.grab_focus()
@@ -224,10 +221,10 @@ func toggle_console():
 			previous_focus_owner.grab_focus()
 		previous_focus_owner = null
 		self._animationPlayer.play('fade')
-
+	
 	is_console_shown = !self.is_console_shown
 	emit_signal("toggled", is_console_shown)
-
+	
 	return self
 
 

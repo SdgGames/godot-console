@@ -1,42 +1,42 @@
 
 # @var  String
 const action_console_toggle = {
-  "name": 'quentincaffeino_console_toggle',
-  "events": [
-    {
-      "scancode": KEY_QUOTELEFT,
-    }
-  ]
+	"name": 'quentincaffeino_console_toggle',
+	"events": [
+		{
+			"scancode": KEY_QUOTELEFT,
+		}
+	]
 }
 
 # @var  String
 const action_console_autocomplete = {
-  "name": 'quentincaffeino_console_autocomplete',
-  "events": [
-    {
-      "scancode": KEY_TAB,
-    }
-  ]
+	"name": 'quentincaffeino_console_autocomplete',
+	"events": [
+		{
+			"scancode": KEY_TAB,
+		}
+	]
 }
 
 # @var  String
 const action_console_history_up = {
-  "name": 'quentincaffeino_console_history_up',
-  "events": [
-    {
-      "scancode": KEY_UP,
-    }
-  ]
+	"name": 'quentincaffeino_console_history_up',
+	"events": [
+		{
+			"scancode": KEY_UP,
+		}
+	]
 }
 
 # @var  String
 const action_console_history_down = {
-  "name": 'quentincaffeino_console_history_down',
-  "events": [
-    {
-      "scancode": KEY_DOWN,
-    }
-  ]
+	"name": 'quentincaffeino_console_history_down',
+	"events": [
+		{
+			"scancode": KEY_DOWN,
+		}
+	]
 }
 
 

@@ -1,18 +1,16 @@
-
 extends 'Utils.gd'
 
 const Iterator = preload('../../quentincaffeino-iterator/src/Iterator.gd')
 
 
 # @var  Dictionary
-var _collection
+var _collection := {}
 
 # @var  int
 var _iterationCurrent = 0
 
 # @var  int
-var length setget _setProtected, length
-
+var length = 0
 
 # @param  Variant  collection
 func _init(collection = {}):
@@ -39,7 +37,7 @@ func add(value):  # void
 
 # Removes an element with a specific key/index from the collection.
 # @param  Variant  key
-func remove(key):  # void
+func remove_at(key):  # void
 	self._collection.erase(key)
 
 
@@ -264,7 +262,7 @@ func getCollection():  # Variant
 	return self._collection
 
 
-func length():  # int
+func get_length():  # int
 	return self._collection.size()
 
 

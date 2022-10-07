@@ -1,5 +1,5 @@
 
-extends Reference
+extends RefCounted
 
 
 # @var  Console
@@ -51,7 +51,7 @@ func _init(console):
 # @returns  void
 func _help(command_name = null):
 	if command_name:
-		var command = self._console.get_command(command_name)
+		var command = self._console.is_command_or_control_pressed(command_name)
 
 		if command:
 			command.describe()

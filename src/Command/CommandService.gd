@@ -1,5 +1,5 @@
 
-extends Reference
+extends RefCounted
 
 const Iterator = preload('res://addons/quentincaffeino-console/addons/quentincaffeino-iterator/src/Iterator.gd')
 const CommandCollection = preload('CommandCollection.gd')
@@ -25,7 +25,7 @@ func values():
 
 
 # @param    String       command_name
-# @param    Reference    target
+# @param    RefCounted    target
 # @param    String|null  target_name
 # @returns  CommandBuilder
 func create(command_name, target, target_name = null):
@@ -54,8 +54,8 @@ func find(command_name):
 
 # @param    String   command_name
 # @returns  void
-func remove(command_name):
-	return self._command_collection.remove(command_name)
+func remove_at(command_name):
+	return self._command_collection.remove_at(command_name)
 
 # @param    String   command_name
 # @returns  String

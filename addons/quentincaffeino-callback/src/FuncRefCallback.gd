@@ -2,8 +2,8 @@
 extends './AbstractCallback.gd'
 
 
-# @param  FuncRef  target
-func _init(target).(target, Utils.Type.METHOD):
+# @param  Callable  target
+func _init(target):
 	pass
 
 

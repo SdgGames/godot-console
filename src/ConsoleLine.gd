@@ -5,8 +5,7 @@ const DefaultActions = preload('./Action/DefaultActions.gd')
 
 
 # @var  RegExLib
-var RegExLib = preload('../addons/quentincaffeino-regexlib/src/RegExLib.gd').new() setget _set_protected
-
+var RegExLib = preload('../addons/quentincaffeino-regexlib/src/RegExLib.gd').new()
 
 const COMMANDS_SEPARATOR = ';'
 
@@ -27,9 +26,7 @@ var _current_command
 
 func _ready():
 	# Console keyboard control
-	self.set_process_input(true)
-
-	self.connect('text_entered', self, 'execute')
+	self.connect('text_submitted',Callable(self,'execute'))
 
 
 # @param  InputEvent
@@ -63,7 +60,7 @@ func _input(e):
 			self._current_command = self._tmp_user_entered_command
 			self._tmp_user_entered_command = null
 
-	# Autocomplete on TAB
+	# Autocomplete checked TAB
 	if Input.is_action_just_pressed(Console.get_action_service().get_real_action_name(DefaultActions.action_console_autocomplete)):
 		if self._autocomplete_triggered_timer and self._autocomplete_triggered_timer.get_time_left() > 0:
 			self._autocomplete_triggered_timer = null
@@ -90,7 +87,7 @@ func _input(e):
 # @param    bool    move_caret_to_end
 # @returns  void
 func setText(text, move_caret_to_end = true):
-	Console.Log.warn("DEPRECATED: We're moving our api from camelCase to snake_case, please update this method to `get_command`. Please refer to documentation for more info.")
+	Console.Log.warn("DEPRECATED: We're moving our api from camelCase to snake_case, please update this method to `is_command_or_control_pressed`. Please refer to documentation for more info.")
 	return self.set_text(text, move_caret_to_end)
 
 # @param    String  text
@@ -101,7 +98,7 @@ func set_text(text, move_caret_to_end = true):
 	self.grab_focus()
 
 	if move_caret_to_end:
-		self.caret_position = text.length()
+		self.caret_column = text.length()
 
 
 # @param    String  input
@@ -109,7 +106,7 @@ func set_text(text, move_caret_to_end = true):
 func execute(input):
 	Console.write_line('[color=#999999]$[/color] ' + input)
 
-	# @var  PoolStringArray
+	# @var  PackedStringArray
 	var rawCommands = RegExLib.split(RECOMMANDS_SEPARATOR, input)
 
 	# @var  Dictionary[]
@@ -117,7 +114,7 @@ func execute(input):
 
 	for parsedCommand in parsedCommands:
 		# @var  Command/Command|null
-		var command = Console.get_command(parsedCommand.name)
+		var command = Console.is_command_or_control_pressed(parsedCommand.name)
 
 		if command:
 			Console.Log.debug('Executing `' + parsedCommand.command + '`.')
@@ -131,7 +128,7 @@ func execute(input):
 	self.clear()
 
 
-# @param    PoolStringArray  rawCommands
+# @param    PackedStringArray  rawCommands
 # @returns  Array
 func _parse_commands(rawCommands):
 	var resultCommands = []
@@ -147,7 +144,7 @@ func _parse_commands(rawCommands):
 # @returns  Dictionary
 func _parse_command(rawCommand):
 	var name = null
-	var arguments = PoolStringArray([])
+	var arguments = PackedStringArray([])
 
 	var beginning = 0  # int
 	var openQuote  # String|null
@@ -175,7 +172,7 @@ func _parse_command(rawCommand):
 			beginning = i + 1
 
 		# Save separated argument
-		if subString != null and typeof(subString) == TYPE_STRING and !subString.empty():
+		if subString != null and typeof(subString) == TYPE_STRING and !subString.is_empty():
 			if !name:
 				name = subString
 			else:
@@ -192,3 +189,7 @@ func _parse_command(rawCommand):
 # @returns  void
 func _set_protected(value):
 	Console.Log.warn('QC/Console/ConsoleLine: set_protected: Attempted to set a protected variable, ignoring.')
+
+
+func _on_console_line_text_submitted(new_text):
+	execute(new_text)
