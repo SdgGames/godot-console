@@ -1,7 +1,6 @@
-
 extends "Utils.gd"
 
-const Iterator = preload("res://addons/quentincaffeino/iterator/src/Iterator.gd")
+const Iterator = preload("../../iterator/src/Iterator.gd")
 
 
 # @var  Dictionary

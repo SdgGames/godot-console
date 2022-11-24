@@ -1,4 +1,3 @@
-
 # @var  String
 var _message
 

@@ -1,4 +1,3 @@
-
 extends CanvasLayer
 
 const BaseCommands = preload('Misc/BaseCommands.gd')

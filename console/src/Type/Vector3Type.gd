@@ -1,5 +1,4 @@
-
-extends 'res://addons/quentincaffeino/console/src/Type/BaseRegexCheckedType.gd'
+extends 'BaseRegexCheckedType.gd'
 
 
 # @var  Vector3|null

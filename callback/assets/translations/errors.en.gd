@@ -1,4 +1,3 @@
-
 const messages = {
 	"qc.callback.target_missing_mv": "qc/callback: ensure: Target is missing method/variable. (%s, %s)",
 

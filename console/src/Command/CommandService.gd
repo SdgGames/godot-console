@@ -1,7 +1,6 @@
-
 extends RefCounted
 
-const Iterator = preload('res://addons/quentincaffeino/iterator/src/Iterator.gd')
+const Iterator = preload('../../../iterator/src/Iterator.gd')
 const CommandCollection = preload('CommandCollection.gd')
 const CommandBuilder = preload('CommandBuilder.gd')
 const Result = preload('../Misc/Result.gd')

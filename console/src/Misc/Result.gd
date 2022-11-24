@@ -1,4 +1,3 @@
-
 const Error = preload("./Error.gd")
 
 

@@ -1,8 +1,7 @@
-
 extends RefCounted
 
-const CallbackBuilder = preload('res://addons/quentincaffeino/callback/src/CallbackBuilder.gd')
-const Callback = preload('res://addons/quentincaffeino/callback/src/Callback.gd')
+const CallbackBuilder = preload('../../../callback/src/CallbackBuilder.gd')
+const Callback = preload('../../../callback/src/Callback.gd')
 const ArgumentFactory = preload('../Argument/ArgumentFactory.gd')
 const Command = preload('Command.gd')
 

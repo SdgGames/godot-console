@@ -1,4 +1,3 @@
-
 const Result = preload('../Misc/Result.gd')
 
 

@@ -1,4 +1,3 @@
-
 extends RefCounted
 
 const Utils = preload("./Utils.gd")

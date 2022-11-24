@@ -1,5 +1,4 @@
-
-extends 'res://addons/quentincaffeino/console/src/Type/BaseRangeType.gd'
+extends 'BaseRangeType.gd'
 
 
 # @param  float  minValue

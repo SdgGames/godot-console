@@ -1,5 +1,4 @@
-
-extends 'res://addons/quentincaffeino/array-utils/src/QueueCollection.gd'
+extends '../../../array-utils/src/QueueCollection.gd'
 
 
 # @param  int  maxLength

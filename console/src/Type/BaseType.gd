@@ -1,4 +1,3 @@
-
 enum CHECK \
 {
 	OK,

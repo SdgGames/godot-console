@@ -1,7 +1,6 @@
-
 extends RefCounted
 
-const CallbackBuilder = preload("res://addons/quentincaffeino/callback/src/CallbackBuilder.gd")
+const CallbackBuilder = preload("../../callback/src/CallbackBuilder.gd")
 
 
 # @var  Callback

@@ -1,7 +1,6 @@
+extends "../../../array-utils/src/Collection.gd"
 
-extends "res://addons/quentincaffeino/array-utils/src/Collection.gd"
-
-const CallbackBuilder = preload("res://addons/quentincaffeino/callback/src/CallbackBuilder.gd")
+const CallbackBuilder = preload("../../../callback/src/CallbackBuilder.gd")
 
 
 func _init(collection = {}):

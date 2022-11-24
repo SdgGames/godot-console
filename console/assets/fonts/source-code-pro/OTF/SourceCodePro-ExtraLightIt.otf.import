@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://3dsfcjl5qw77"
-path="res://.godot/imported/SourceCodePro-ExtraLightIt.otf-163656e96e98578f813c8b96b62a68c7.fontdata"
+path="res://.godot/imported/SourceCodePro-ExtraLightIt.otf-214d660b0ffcd0521d64ef1dcac3fde9.fontdata"
 
 [deps]
 
-source_file="res://addons/quentincaffeino/console/assets/fonts/source-code-pro/OTF/SourceCodePro-ExtraLightIt.otf"
-dest_files=["res://.godot/imported/SourceCodePro-ExtraLightIt.otf-163656e96e98578f813c8b96b62a68c7.fontdata"]
+source_file="res://addons/godot-console/console/assets/fonts/source-code-pro/OTF/SourceCodePro-ExtraLightIt.otf"
+dest_files=["res://.godot/imported/SourceCodePro-ExtraLightIt.otf-214d660b0ffcd0521d64ef1dcac3fde9.fontdata"]
 
 [params]
 
