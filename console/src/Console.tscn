@@ -69,8 +69,6 @@ mouse_filter = 2
 
 [node name="ConsoleText" type="RichTextLabel" parent="ConsoleBox/Container"]
 layout_mode = 2
-offset_right = 1600.0
-offset_bottom = 417.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_next = NodePath("../LineEdit")
@@ -79,9 +77,6 @@ theme = ExtResource("2_j5mnn")
 
 [node name="ConsoleLine" type="LineEdit" parent="ConsoleBox/Container"]
 layout_mode = 2
-offset_top = 421.0
-offset_right = 1600.0
-offset_bottom = 450.0
 size_flags_horizontal = 3
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
