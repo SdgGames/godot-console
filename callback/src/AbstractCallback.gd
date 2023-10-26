@@ -45,9 +45,9 @@ func bind(argv = []):
 		self._bind_argv.append(_argv)
 
 
-# @param  Variant[]  argv
+# @param  Variant[]  stringName
 # @returns  Variant
-func call(argv = []):
+func call(stringName):
 	pass
 
 
