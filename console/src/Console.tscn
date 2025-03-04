@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://wufx2ippa0vr"]
 
-[ext_resource type="Script" path="res://addons/godot-console/console/src/Console.gd" id="1_3rbtl"]
+[ext_resource type="Script" uid="uid://byhdquiihl2mx" path="res://addons/godot-console/console/src/Console.gd" id="1_3rbtl"]
 [ext_resource type="Theme" uid="uid://cki0wfljgijbs" path="res://addons/godot-console/console/assets/themes/Console.tres" id="2_j5mnn"]
-[ext_resource type="Script" path="res://addons/godot-console/console/src/ConsoleLine.gd" id="3_o41m6"]
+[ext_resource type="Script" uid="uid://cv2dvsp6cc116" path="res://addons/godot-console/console/src/ConsoleLine.gd" id="3_o41m6"]
 
 [sub_resource type="Animation" id="1"]
 length = 0.25
@@ -39,7 +39,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xtuvw"]
 _data = {
-"fade": SubResource("1")
+&"fade": SubResource("1")
 }
 
 [node name="Console" type="CanvasLayer"]
